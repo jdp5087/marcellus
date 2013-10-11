@@ -1,0 +1,75 @@
+var lab = {
+    'initMap' : function () {
+        var map = new L.Map("map")
+                    .setView(new L.LatLng(41.440, -76.525), 10)
+                    .addLayer(new L.TileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png'));
+    
+
+    if (map) {
+	d3.json("./data/test.json", function (error, json) {
+	    if (error) {
+		console.log("ERROR: Couldn't load your stupid file");
+	    }
+	    var svg = d3.select(map.getPanes().markerPane).append("svg");
+	    var SPUD = json.SPUD;
+	    var pooling = json.pooling;
+	    var SPUDGroup = svg.append('g').attr('id','SPUDGroup');
+	    var poolingGroup = svg.append('g').attr('id','poolingGroup');
+	    var SPUDMarker = SPUDGroup
+	                     .selectAll("circle")
+                                  .data(SPUD.features)
+	                     .enter()
+	                          .append("circle");
+		          
+	    var boundary = json.boundary;
+	    var boundingBox = d3.geo.bounds(boundary);
+
+	    var project = function (point) {
+		var projPoint = map.latLngToLayerPoint(new L.LatLng(point[1], point[0]));
+		return [projPoint.x, projPoint.y];
+	    }
+
+	    var reset = function () {
+		var bottomLeft = project(boundingBox[0]);
+		var topRight = project(boundingBox[1]);
+		
+		svg
+		    .attr("width", topRight[0] - bottomLeft[0])
+		    .attr("height", bottomLeft[1] - topRight[1])
+		    .style("margin-left", bottomLeft[0] + "px")
+		    .style("margin-top", topRight[1] + "px");
+
+		SPUDGroup
+		   .attr("transform", "translate(" + -bottomLeft[0] + ", " + -topRight[1] + ")");
+
+		var poolingMarker = poolingGroup.selectAll("path").data(pooling.features).enter()
+	                                                      .append("path")
+	                          .attr("d", d3.geo.path().bounds(boundingBox));
+		console.log(poolingMarker);
+		
+		poolingGroup
+		   .attr("transform", "translate(" + -bottomLeft[0] + ", " + -topRight[1] + ")");
+		   
+
+		SPUDMarker
+		    .attr("r", 5)
+		    .attr("cx", function (well) {return project(well.geometry.coordinates)[0]; })
+		    .attr("cy", function (well) {return project(well.geometry.coordinates)[1]; });
+
+		poolingMarker
+		      .attr("stroke-width",2);
+		
+		L.geoJson(json.pooling).addTo(map);
+
+	    };
+
+	    reset();
+	    map.on("viewreset", reset);
+
+	});
+    } else {
+	console.log("ERROR: The map was not .");
+	return;
+    }
+    }
+};

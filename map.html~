@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Geog 461W Lab 1: Introducing Web Maps">
+    <meta name="author" content="your_name_here">
+    <meta name="keywords" content="leaflet, maps, open data, tutorial">
+
+    <title>Geog 461W | Lab 2 | Interactive Web Maps</title>
+
+    <link rel="stylesheet" type="text/css" href="./styles/default.css"></link>
+    <link rel="stylesheet" type="text/css" href="./styles/leaflet.css"></link>
+    <script type="text/javascript" src="./scripts/leaflet.js"></script>
+    <script type="text/javascript" src="./scripts/lab.js"></script>
+</head>
+<body>
+    <h1>This is the page title. Please change me!!!</h1>
+    <h3>Your Name Here</h3>
+
+    <div id="map"></div>
+    <script type="text/javascript">
+        lab.initMap();
+    </script>
+
+    <footer>Copyright &copy; 2012 The Pennsylvania State University</footer>
+</body>
+</html>
