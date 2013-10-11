@@ -9,16 +9,23 @@ var lab = {
 			console.log("ERROR: Couldn't load your stupid file");
 		    }
 		    console.log(json);
-
-		    L.geoJson(json.pipe, {
-			style: function(feature) {
-			    switch (feature.properties.TYPE) {
-			    	console.log(feature.properties.TYPE)
-				case 1: return {fillColor: "#000000"};
-				case 3: return {fillColor: "#ffff00"};
-			    }
+		    function bp(feature, layer) {
+			if (feature.properties) {
+			    var p = feature.properties;
+			    var c = "<p><strong>Well Name</strong>: " + p.LABEL +"</p>" + 
+				"<p><strong>Date Drilled</strong>: " + p.SPUD_DT+ "</p>";
+			    layer.bindPopup(c);
 			}
+		    }
+
+		    var pipeStyle = {
+			color:"#ff0000",
+		    };
+		    var pipe = L.geoJson(json.pipe, {
+			style: pipeStyle,
 		    }).addTo(map);
+
+		    console.log(pipe);
 
 		    L.geoJson(json.pooling, {
 		    	style: function(feature) {
@@ -48,13 +55,14 @@ var lab = {
 		    };
 
 			L.geoJson(json.SPUD, {
-				pointToLayer: function (feature, latlng) {
-					if (feature.properties.OPERATOR == "CHESAPEAKE APPALACHIA LLC") {
-				    	return L.circleMarker(latlng, ChesapeakeMarker);
-				    } else {
-				    	return L.circleMarker(latlng, ChiefMarker);
-				    }
+			    pointToLayer: function (feature, latlng) {
+				if (feature.properties.OPERATOR == "CHESAPEAKE APPALACHIA LLC") {
+				    return L.circleMarker(latlng, ChesapeakeMarker);
+				} else {
+				    return L.circleMarker(latlng, ChiefMarker);
 				}
+			    },
+			    onEachFeature: bp,
 		    }).addTo(map);
 
 		    // L.geoJson(json.SPUD, {
