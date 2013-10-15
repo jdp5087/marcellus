@@ -56,7 +56,7 @@ var lab = {
 		    	onEachFeature: bpPooling,
 		    }).addTo(map);
 
-		    var ChesapeakeMarker = {
+		    var chesapeakeMarker = {
 			radius: 6,
 			fillColor: "#ff0000",
 			color: "#ff0000",
@@ -65,7 +65,7 @@ var lab = {
 			fillOpacity: 0.8
 		    };
 
-		    var ChiefMarker = {
+		    var chiefMarker = {
 			radius: 6,
 			fillColor: "#0000ff",
 			color: "#0000ff",
@@ -74,23 +74,58 @@ var lab = {
 			fillOpacity: 0.8
 		    };
 
+		    var excoMarker = {
+			radius: 6,
+			fillColor: "#00ff00",
+			color: "#00ff00",
+			weight: 1,
+			opacity: 1,
+			fillOpacity: 0.8
+		    };
+		  
+		    var southwesternMarker = {
+			radius: 6,
+			fillColor: "#ffff00",
+			color: "#ffff00",
+			weight: 1,
+			opacity: 1,
+			fillOpacity: 0.8
+		    };
+
 			var SPUDLyr = L.geoJson(json.SPUD, {
 			    pointToLayer: function (feature, latlng) {
 					if (feature.properties.OPERATOR == "CHESAPEAKE APPALACHIA LLC") {
-					    return L.circleMarker(latlng, ChesapeakeMarker);
+					    return L.circleMarker(latlng, chesapeakeMarker);
 					} else {
-					    return L.circleMarker(latlng, ChiefMarker);
+					    return L.circleMarker(latlng, chiefMarker);
 					}
 			    },
 			    onEachFeature: bpSPUD,
 		    }).addTo(map);
+			var propWellsLyr = L.geoJson(json.propWells, {
+			    pointToLayer: function (feature, latlng) {
+					if (feature.properties.OPERATOR == "CHESAPEAKE APPALACHIA LLC") {
+					    return L.circleMarker(latlng, chesapeakeMarker);
+					} else if (feature.properties.OPERATOR == "CHIEF OIL & GAS LLC") {
+					    return L.circleMarker(latlng, chiefMarker);
+					} else if (feature.properties.OPERATOR == "EXCO RESOURCES PA LLC") {
+						return L.circleMarker(latlng, excoMarker);
+					} else {
+						return L.circleMarker(latlng, southwesternMarker)
+			    }
+			},
+		    }).addTo(map);
+
+		    var toggleMaps = {
+				"SPUD Wells": SPUDLyr,
+				"Proposed Wells": propWellsLyr,
+		    };
 			var overlayMaps = {
 				"Pooling Units": poolingLyr,
 				"Proposed Pipeline": pipeLyr,
-				"SPUD Wells": SPUDLyr,
 			};
 
-			L.control.layers({},overlayMaps).addTo(map);
+			L.control.layers(toggleMaps,overlayMaps).addTo(map);
 	});
     } else {
 	console.log("ERROR: The map was not .");
