@@ -12,8 +12,9 @@ var lab = {
 		    function bp(feature, layer) {
 			if (feature.properties) {
 			    var p = feature.properties;
-			    var c = "<p><strong>Well Name</strong>: " + p.LABEL +"</p>" + 
-				"<p><strong>Date Drilled</strong>: " + p.SPUD_DT+ "</p>";
+			    var c = "<ul><li><strong>Well Name</strong>: " + p.LABEL +"</li>" + 
+			    "<li><strong>Well API</strong>: " + p.WELL_API + "</li>" +
+				"<li><strong>Date Drilled</strong>: " + p.SPUD_DT+ "</li></ul>";
 			    layer.bindPopup(c);
 			}
 		    }
