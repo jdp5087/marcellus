@@ -1,4 +1,4 @@
-var lab = {
+var marcellus = {
     'initMap' : function () {
         var map = new L.Map("map")
                     .setView(new L.LatLng(41.440, -76.525), 10)
@@ -128,7 +128,7 @@ var lab = {
 			L.control.layers(toggleMaps,overlayMaps).addTo(map);
 	});
     } else {
-	console.log("ERROR: The map was not .");
+		console.log("ERROR: The map was not .");
 	return;
     }
     }
