@@ -27,17 +27,26 @@ var lab = {
 				    layer.bindPopup(c);
 				}
 		    }
+		    function bpPipe(feature, layer) {
+				if (feature.properties) {
+				    var p = feature.properties;
+				    var c = "<ul><li><strong>Project Name</strong>: " + p.PROJ_NM +"</li>" + 
+				    "<li><strong>Operator</strong>: " + p.OPERATOR + "</li>" +
+					"<li><strong>Recorded Date</strong>: " + p.RECORDED+ "</li></ul>";
+				    layer.bindPopup(c);
+				}
+		    }
 
 		    var pipeStyle = {
 			color:"#ff0000",
 		    };
-		    var pipe = L.geoJson(json.pipe, {
+		    var pipeLyr = L.geoJson(json.pipe, {
 				style: pipeStyle,
+
 		    }).addTo(map);
 
-		    console.log(pipe);
 
-		    L.geoJson(json.pooling, {
+		    var poolingLyr = L.geoJson(json.pooling, {
 		    	style: function(feature) {
 		    	    switch (feature.properties.RuleID) {
 		    		case 1: return {color: "#ff0000"};
@@ -65,7 +74,7 @@ var lab = {
 			fillOpacity: 0.8
 		    };
 
-			L.geoJson(json.SPUD, {
+			var SPUDLyr = L.geoJson(json.SPUD, {
 			    pointToLayer: function (feature, latlng) {
 					if (feature.properties.OPERATOR == "CHESAPEAKE APPALACHIA LLC") {
 					    return L.circleMarker(latlng, ChesapeakeMarker);
@@ -75,15 +84,13 @@ var lab = {
 			    },
 			    onEachFeature: bpSPUD,
 		    }).addTo(map);
+			var overlayMaps = {
+				"Pooling Units": poolingLyr,
+				"Proposed Pipeline": pipeLyr,
+				"SPUD Wells": SPUDLyr,
+			};
 
-		    // L.geoJson(json.SPUD, {
-		    // 	style: function(feature) {
-		    // 	    switch (feature.properties.OPERATOR) {
-		    // 		case 'CHESAPEAKE APPALACHIA LLC': return {color: "#ff0000"};
-		    // 		case 'CHIEF OIL & GAS LLC': return {color: "#0000ff"};
-		    // 	    }
-		    // 	}
-		    // }).addTo(map);
+			L.control.layers({},overlayMaps).addTo(map);
 	});
     } else {
 	console.log("ERROR: The map was not .");
