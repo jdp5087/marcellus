@@ -9,21 +9,30 @@ var lab = {
 			console.log("ERROR: Couldn't load your stupid file");
 		    }
 		    console.log(json);
-		    function bp(feature, layer) {
-			if (feature.properties) {
-			    var p = feature.properties;
-			    var c = "<ul><li><strong>Well Name</strong>: " + p.LABEL +"</li>" + 
-			    "<li><strong>Well API</strong>: " + p.WELL_API + "</li>" +
-				"<li><strong>Date Drilled</strong>: " + p.SPUD_DT+ "</li></ul>";
-			    layer.bindPopup(c);
-			}
+		    function bpSPUD(feature, layer) {
+				if (feature.properties) {
+				    var p = feature.properties;
+				    var c = "<ul><li><strong>Well Name</strong>: " + p.LABEL +"</li>" + 
+				    "<li><strong>Well API</strong>: " + p.WELL_API + "</li>" +
+					"<li><strong>Date Drilled</strong>: " + p.SPUD_DT+ "</li></ul>";
+				    layer.bindPopup(c);
+				}
+		    }
+		    function bpPooling(feature, layer) {
+				if (feature.properties) {
+				    var p = feature.properties;
+				    var c = "<ul><li><strong>Unit Name</strong>: " + p.UNIT +"</li>" + 
+				    "<li><strong>Operator</strong>: " + p.OPERATOR + "</li>" +
+					"<li><strong>Recorded Date</strong>: " + p.RECORDED+ "</li></ul>";
+				    layer.bindPopup(c);
+				}
 		    }
 
 		    var pipeStyle = {
 			color:"#ff0000",
 		    };
 		    var pipe = L.geoJson(json.pipe, {
-			style: pipeStyle,
+				style: pipeStyle,
 		    }).addTo(map);
 
 		    console.log(pipe);
@@ -34,7 +43,8 @@ var lab = {
 		    		case 1: return {color: "#ff0000"};
 		    		case 2: return {color: "#0000ff"};
 		    	    }
-		    	}
+		    	},
+		    	onEachFeature: bpPooling,
 		    }).addTo(map);
 
 		    var ChesapeakeMarker = {
@@ -57,13 +67,13 @@ var lab = {
 
 			L.geoJson(json.SPUD, {
 			    pointToLayer: function (feature, latlng) {
-				if (feature.properties.OPERATOR == "CHESAPEAKE APPALACHIA LLC") {
-				    return L.circleMarker(latlng, ChesapeakeMarker);
-				} else {
-				    return L.circleMarker(latlng, ChiefMarker);
-				}
+					if (feature.properties.OPERATOR == "CHESAPEAKE APPALACHIA LLC") {
+					    return L.circleMarker(latlng, ChesapeakeMarker);
+					} else {
+					    return L.circleMarker(latlng, ChiefMarker);
+					}
 			    },
-			    onEachFeature: bp,
+			    onEachFeature: bpSPUD,
 		    }).addTo(map);
 
 		    // L.geoJson(json.SPUD, {
