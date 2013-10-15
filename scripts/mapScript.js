@@ -12,7 +12,8 @@ var marcellus = {
 		    function bpSPUD(feature, layer) {
 				if (feature.properties) {
 				    var p = feature.properties;
-				    var c = "<ul><li><strong>Well Name</strong>: " + p.LABEL +"</li>" + 
+				    var c = "<ul><li><strong>Well Name</strong>: " + p.LABEL +"</li>" +
+				    "<li><strong>Operator</strong>: " + p.OPERATOR + "</li>" +
 				    "<li><strong>Well API</strong>: " + p.WELL_API + "</li>" +
 					"<li><strong>Date Drilled</strong>: " + p.SPUD_DT+ "</li></ul>";
 				    layer.bindPopup(c);
@@ -51,7 +52,12 @@ var marcellus = {
 			weight: 2,
 		    };
 		    var pipeLyr = L.geoJson(json.pipe, {
-				style: pipeStyle,
+				style: function(feature) {
+					switch (feature.properties.TYPE) {
+		    		case 1: return {color: "#000", weight: 4,};
+		    		case 3: return {color: "#000", weight: 1.5,};
+					}
+				},
 
 		    }).addTo(map);
 
