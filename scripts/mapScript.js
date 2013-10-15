@@ -18,6 +18,15 @@ var marcellus = {
 				    layer.bindPopup(c);
 				}
 		    }
+		    function bpPermits(feature, layer) {
+				if (feature.properties) {
+				    var p = feature.properties;
+				    var c = "<ul><li><strong>Proposed Well Name</strong>: " + p.LABEL +"</li>" + 
+				    "<li><strong>Well API</strong>: " + p.WELL_API + "</li>" +
+					"<li><strong>Permit Issued Date</strong>: " + p.PERMIT_ISS+ "</li></ul>";
+				    layer.bindPopup(c);
+				}
+		    }
 		    function bpPooling(feature, layer) {
 				if (feature.properties) {
 				    var p = feature.properties;
@@ -38,7 +47,8 @@ var marcellus = {
 		    }
 
 		    var pipeStyle = {
-			color:"#ff0000",
+			color:"#000",
+			weight: 2,
 		    };
 		    var pipeLyr = L.geoJson(json.pipe, {
 				style: pipeStyle,
@@ -49,45 +59,45 @@ var marcellus = {
 		    var poolingLyr = L.geoJson(json.pooling, {
 		    	style: function(feature) {
 		    	    switch (feature.properties.RuleID) {
-		    		case 1: return {color: "#ff0000"};
-		    		case 2: return {color: "#0000ff"};
+		    		case 1: return {fillColor: "#ff0000", color: "#000", weight: 1.5,};
+		    		case 2: return {fillColor: "#0000ff", color: "#000", weight: 1.5,};
 		    	    }
 		    	},
 		    	onEachFeature: bpPooling,
 		    }).addTo(map);
 
 		    var chesapeakeMarker = {
-			radius: 6,
+			radius: 5,
 			fillColor: "#ff0000",
-			color: "#ff0000",
-			weight: 1,
+			color: "#000",
+			weight: .8,
 			opacity: 1,
 			fillOpacity: 0.8
 		    };
 
 		    var chiefMarker = {
-			radius: 6,
+			radius: 5,
 			fillColor: "#0000ff",
-			color: "#0000ff",
-			weight: 1,
+			color: "#000",
+			weight: .8,
 			opacity: 1,
 			fillOpacity: 0.8
 		    };
 
 		    var excoMarker = {
-			radius: 6,
+			radius: 5,
 			fillColor: "#00ff00",
-			color: "#00ff00",
-			weight: 1,
+			color: "#000",
+			weight: .8,
 			opacity: 1,
 			fillOpacity: 0.8
 		    };
 		  
 		    var southwesternMarker = {
-			radius: 6,
+			radius: 5,
 			fillColor: "#ffff00",
-			color: "#ffff00",
-			weight: 1,
+			color: "#000",
+			weight: .8,
 			opacity: 1,
 			fillOpacity: 0.8
 		    };
@@ -114,6 +124,7 @@ var marcellus = {
 						return L.circleMarker(latlng, southwesternMarker)
 			    }
 			},
+			onEachFeature: bpPermits,
 		    }).addTo(map);
 
 		    var toggleMaps = {

@@ -7,6 +7,10 @@ body {
     display: block;;
 }
 
+ul {
+    list-style-type: none;
+}
+
 a {
     color: #00B7FF;
 }
@@ -15,11 +19,6 @@ footer {
     text-align: center;
 }
 
-path {
-    fill-opacity: 0.5;
-    stroke: #000;
-    stroke-width: 1.5px;
-}
 
 path:hover {
     fill-opacity: 1.0;
