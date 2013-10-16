@@ -1,14 +1,14 @@
-body {
-    padding: 50px;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    width: 960px;
-    margin-right: auto;
-    margin-left: auto;
-    display: block;;
+html, body, #map {
+    margin: 0;
+    width: 100%;
+    height: 100%;
 }
-
 ul {
     list-style-type: none;
+    text-align: left;
+}
+li {
+    text-align: left;
 }
 
 a {
@@ -33,21 +33,6 @@ circle:hover {
     fill-opacity: 1.0;
 }
 
-.traffic_spring {
-    fill: rgb(178,223,138);
-}
-
-.traffic_summer {
-    fill: rgb(51,160,44);
-}
-
-.traffic_fall {
-    fill: rgb(166,206,227);
-}
-
-.traffic_winter {
-    fill: rgb(31,120,180);
-}
 
 .popup_content {
     text-align: left;
@@ -61,10 +46,3 @@ circle:hover {
     padding-bottom: 1em;
 }
 
-#map {
-    width: 960px;
-    height: 400px;
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-}
