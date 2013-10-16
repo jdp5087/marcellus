@@ -1,7 +1,7 @@
 var marcellus = {
     'initMap' : function () {
         var map = new L.Map("map")
-                    .setView(new L.LatLng(41.440, -76.525), 10)
+                    .setView(new L.LatLng(41.440, -76.525), 11)
                     .addLayer(new L.TileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png'));
 	    if (map) {
 		d3.json("./data/test.json", function (error, json) {
