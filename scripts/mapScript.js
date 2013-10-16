@@ -13,8 +13,8 @@ var marcellus = {
 				if (feature.properties) {
 				    var p = feature.properties;
 				    var c = "<ul><li><strong>Well Name</strong>: " + p.LABEL +"</li>" +
-				    "<li><strong>Operator</strong>: " + p.OPERATOR + "</li>" +
 				    "<li><strong>Well API</strong>: " + p.WELL_API + "</li>" +
+				    "<li><strong>Operator</strong>: " + p.OPERATOR + "</li>" +
 					"<li><strong>Date Drilled</strong>: " + p.SPUD_DT+ "</li></ul>";
 				    layer.bindPopup(c);
 				}
@@ -22,8 +22,10 @@ var marcellus = {
 		    function bpPermits(feature, layer) {
 				if (feature.properties) {
 				    var p = feature.properties;
-				    var c = "<ul><li><strong>Proposed Well Name</strong>: " + p.LABEL +"</li>" + 
+				    var c = "<ul><li><strong>Permitted Well Name</strong>: " + p.LABEL +"</li>" + 
 				    "<li><strong>Well API</strong>: " + p.WELL_API + "</li>" +
+				    "<li><strong>Operator</strong>: " + p.OPERATOR + "</li>" +
+				    "<li><strong>Authorization Description</strong>: " + p.AUTH_DESC + "</li>" +
 					"<li><strong>Permit Issued Date</strong>: " + p.PERMIT_ISS+ "</li></ul>";
 				    layer.bindPopup(c);
 				}
@@ -41,8 +43,9 @@ var marcellus = {
 				if (feature.properties) {
 				    var p = feature.properties;
 				    var c = "<ul><li><strong>Project Name</strong>: " + p.PROJ_NM +"</li>" + 
-				    "<li><strong>Operator</strong>: " + p.OPERATOR + "</li>" +
-					"<li><strong>Recorded Date</strong>: " + p.RECORDED+ "</li></ul>";
+				    "<li><strong>Sponsor</strong>: " + p.SPONSOR + "</li>" +
+				    "<li><strong>Source</strong>: " + p.SOURCE + "</li>" +
+					"<li><strong>Notified Date</strong>: " + p.NOTIFIED+ "</li></ul>";
 				    layer.bindPopup(c);
 				}
 		    }
@@ -54,10 +57,11 @@ var marcellus = {
 		    var pipeLyr = L.geoJson(json.pipe, {
 				style: function(feature) {
 					switch (feature.properties.TYPE) {
-		    		case 1: return {color: "#000", weight: 4,};
-		    		case 3: return {color: "#000", weight: 1.5,};
+		    		case 1: return {color: "#000", weight: 4, };
+		    		case 3: return {color: "#000", weight: 1.5, };
 					}
 				},
+				onEachFeature: bpPipe
 
 		    }).addTo(map);
 
@@ -78,7 +82,7 @@ var marcellus = {
 			color: "#000",
 			weight: .8,
 			opacity: 1,
-			fillOpacity: 0.8
+			fillOpacity: 0.5
 		    };
 
 		    var chiefMarker = {
@@ -87,7 +91,7 @@ var marcellus = {
 			color: "#000",
 			weight: .8,
 			opacity: 1,
-			fillOpacity: 0.8
+			fillOpacity: 0.5
 		    };
 
 		    var excoMarker = {
@@ -96,7 +100,7 @@ var marcellus = {
 			color: "#000",
 			weight: .8,
 			opacity: 1,
-			fillOpacity: 0.8
+			fillOpacity: 0.5
 		    };
 		  
 		    var southwesternMarker = {
@@ -105,7 +109,7 @@ var marcellus = {
 			color: "#000",
 			weight: .8,
 			opacity: 1,
-			fillOpacity: 0.8
+			fillOpacity: 0.5
 		    };
 
 			var SPUDLyr = L.geoJson(json.SPUD, {
@@ -118,7 +122,7 @@ var marcellus = {
 			    },
 			    onEachFeature: bpSPUD,
 		    }).addTo(map);
-			var propWellsLyr = L.geoJson(json.propWells, {
+			var permWellsLyr = L.geoJson(json.permWells, {
 			    pointToLayer: function (feature, latlng) {
 					if (feature.properties.OPERATOR == "CHESAPEAKE APPALACHIA LLC") {
 					    return L.circleMarker(latlng, chesapeakeMarker);
@@ -128,14 +132,14 @@ var marcellus = {
 						return L.circleMarker(latlng, excoMarker);
 					} else {
 						return L.circleMarker(latlng, southwesternMarker)
-			    }
-			},
-			onEachFeature: bpPermits,
+			    	}
+				},
+				onEachFeature: bpPermits,
 		    }).addTo(map);
 
 		    var toggleMaps = {
 				"SPUD Wells": SPUDLyr,
-				"Proposed Wells": propWellsLyr,
+				"Permitted Wells": permWellsLyr,
 		    };
 			var overlayMaps = {
 				"Pooling Units": poolingLyr,
