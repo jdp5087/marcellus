@@ -8,11 +8,10 @@ var marcellus = {
 		    if (error) {
 			console.log("ERROR: Couldn't load your stupid file");
 		    }
-		    console.log(json);
 		    function bpSPUD(feature, layer) {
 				if (feature.properties) {
 				    var p = feature.properties;
-				    var c = "<ul><li><strong>Well Name</strong>: " + p.LABEL +"</li>" +
+				    var c = "<ul><li><strong>Well Name</strong>: " + p.FARM_NM +"</li>" +
 				    "<li><strong>Well API</strong>: " + p.WELL_API + "</li>" +
 				    "<li><strong>Operator</strong>: " + p.OPERATOR + "</li>" +
 					"<li><strong>Date Drilled</strong>: " + p.SPUD_DT+ "</li></ul>";
@@ -147,8 +146,6 @@ var marcellus = {
 		    markersPerm.addLayer(permWellsLyr);
 		    map.addLayer(markersSPUD);
 		    map.addLayer(markersPerm);
-
-		    console.log(markersSPUD);
 
 		    var toggleMaps = {
 				"SPUD Wells": markersSPUD,
