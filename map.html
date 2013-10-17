@@ -17,13 +17,36 @@
     <script type="text/javascript" src="./scripts/leaflet.markercluster.js"></script>
     <script type="text/javascript" src="./scripts/mapScript.js"></script>
     <script type="text/javascript" src="./scripts/d3.js"></script>
+    <script type="text/javascript" src="./scripts/jquery.js"></script>
+    <script type="text/javascript" src="./scripts/jquery-ui.js"></script>
 </head>
 <body>
+    <div id="button-div">
+    <button id="help-button">Toggle Help Menu</button>
+    </div>
+        <div id="help">
+            <h3>Test</h3>
+            <p>Stuff and junk.</p>
+            <p>More stuff and junk</p>
+        </div>
     <div id="map"></div>
     <script type="text/javascript">
         marcellus.initMap();
     </script>
+    <script>
+        $(window).load(function() {
+            function runEffect() {
+                $('#help').toggle('blind', {}, 500);
+            }
+            $('#help-button').click(function() {
+                runEffect();
+                return false;
+            });
+        });
+    </script>
+    
     <div id="text">
         <h6>MAP PREPARED BY THE SULLIVAN COUNTY OFFICE OF PLANNING &amp; DEVELOPMENT. SULLIVAN COUNTY, PA IS NOT RESPONSIBLE FOR POSSIBLE ERRORS, OMISSIONS, MISUSE, OR MISINTERPRETATION. COUNTY DIGITAL INFORMATION IS PREPARED FOR REFERENCE PURPOSES ONLY AND SHOULD NOT BE USED, AND IS NOT INTENDED FOR, LEGAL, SURVEY OR ENGINEERING PURPOSES.</h6>
+    </div>
 </body>
 </html>
