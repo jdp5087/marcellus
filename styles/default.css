@@ -17,27 +17,33 @@ a {
 
 #button-div {
     float: center;
-    position: relative;
-    margin-right: auto;
-    margin-left: auto;
+    position: absolute;
+    left: 60px;
+    top: 5px;
 
     z-index: 20001;
 }
 
 #help {
-    text-align: center;
     border-radius: 8px;
-    float: left;
-    position: absolute;
-    top: 60px;
-    left: 60px;
-    width:  800px;
+    text-align: center;
+    float: center;
+    position: relative;
+    top: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
     height: 450px;
-    padding: 0.4em;
-    z-index: 20001;
+    z-index: 20002;
     color: white;
-    background-color: #666;
+    background-color: gray;
     opacity: .9;
+
+    margin-top: -450px;
+}
+
+#help-text {
+    padding: 5px;
 }
 
 
