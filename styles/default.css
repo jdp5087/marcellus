@@ -43,7 +43,12 @@ a {
 }
 
 #help-text {
-    padding: 5px;
+    padding: 10px;
+    font-size: small;
+}
+
+#help-text ul {
+    list-style-type: circle;
 }
 
 

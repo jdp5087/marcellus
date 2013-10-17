@@ -22,13 +22,22 @@
 </head>
 <body>
     <div id="button-div">
-    <button id="help-button">Toggle Help Menu</button>
+    <button id="help-button">Toggle Menu</button>
     </div>
         <div id="help">
             <div id="help-text">
-            <h3>Test</h3>
-            <p>Stuff and junk.</p>
-            <p>More stuff and junk</p>
+            <h3>Oil &amp; Gas Activity In Sullivan County, PA</h3>
+            <p>This map contains four layers: SPUD (drilled) gas wells, permitted gas wells, pooling units (grouped oil and gas leases), and proposed pipeline in Sullivan County, PA.</p>
+            <h4>Notes regarding interaction with the map:</h4>
+            <ul>
+                <li>Due to the way layers are added to this map, both SPUD well and permitted well layers are displayed on inital map load. This can be confusing. In order to correct this issue, mouse over the layer-toggling widget in the upper-right hand corner of the map. Selecting a radio-button for either SPUD wells or permitted wells will correct this issue, allowing only one layer to be displayed at a time.</li>
+                <br>
+                <li>The wells are displayed using a clustering technique (multi-colored circles on the map) At higher zoom levels (zoom in and out with the mouse-wheel or the zoom widget in the upper-left hand corner), the clustering radius will decrease, and individual wells begin to become visible. Additionally, on mouse-over, the boundaries of an individual cluster will be highlighted. Zoom to a cluster by clicking once in the highlighted area. A cluster can also be be double-clicked at high zoom-levels, displaying each individual well in a densely clustered node.</li>
+                <br>
+                <li>Details for each layer are available through pop-up boxes. Simply click on the feature of interest, and information regarding that feature will be displayed. The pop-up can then be closed by clicking the "x" in the upper-right corner of the message box.</li>
+                <br>
+                <li> This menu can be closed by clicking the "Toggle Menu" button in the upper-left corner of the map. Simply click the button a second time to re-open the menu.</li>
+            </ul>
             </div>
         </div>
     <div id="map"></div>
