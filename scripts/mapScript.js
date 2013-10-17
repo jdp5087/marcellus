@@ -11,7 +11,7 @@ var marcellus = {
 		    function bpSPUD(feature, layer) {
 				if (feature.properties) {
 				    var p = feature.properties;
-				    var c = "<ul><li><strong>Well Name</strong>: " + p.FARM_NM +"</li>" +
+				    var c = "<ul><li><strong>SPUD Well Name</strong>: " + p.FARM_NM +"</li>" +
 				    "<li><strong>Well API</strong>: " + p.WELL_API + "</li>" +
 				    "<li><strong>Operator</strong>: " + p.OPERATOR + "</li>" +
 					"<li><strong>Date Drilled</strong>: " + p.SPUD_DT+ "</li></ul>";
@@ -32,7 +32,7 @@ var marcellus = {
 		    function bpPooling(feature, layer) {
 				if (feature.properties) {
 				    var p = feature.properties;
-				    var c = "<ul><li><strong>Unit Name</strong>: " + p.UNIT +"</li>" + 
+				    var c = "<ul><li><strong>Pooling Unit Name</strong>: " + p.UNIT +"</li>" + 
 				    "<li><strong>Operator</strong>: " + p.OPERATOR + "</li>" +
 					"<li><strong>Recorded Date</strong>: " + p.RECORDED+ "</li></ul>";
 				    layer.bindPopup(c);
@@ -41,7 +41,7 @@ var marcellus = {
 		    function bpPipe(feature, layer) {
 				if (feature.properties) {
 				    var p = feature.properties;
-				    var c = "<ul><li><strong>Project Name</strong>: " + p.PROJ_NM +"</li>" + 
+				    var c = "<ul><li><strong>Pipeline Project Name</strong>: " + p.PROJ_NM +"</li>" + 
 				    "<li><strong>Sponsor</strong>: " + p.SPONSOR + "</li>" +
 				    "<li><strong>Source</strong>: " + p.SOURCE + "</li>" +
 					"<li><strong>Notified Date</strong>: " + p.NOTIFIED+ "</li></ul>";
