@@ -17,16 +17,22 @@ footer {
 
 
 path:hover {
-    fill-opacity: 1.0;
+    fill-opacity: .65;
 }
 
 #text {
-    position: absolute;
-    bottom: 1em;
-    left: 1em;
+    border-radius: 8px;
+
+    float: left;
+    position: relative;
+    bottom: 7em;
+    margin-left: auto;
+    margin-right: auto;
     width: 800px;
     z-index: 20000;
-    background-color: white;
+    color: black;
+    background-color: gray;
+    opacity: .5;
     padding: 0 0.5em 0.5em 0.5em;
 }
 

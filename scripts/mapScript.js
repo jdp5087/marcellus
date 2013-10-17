@@ -121,7 +121,7 @@ var marcellus = {
 					}
 			    },
 			    onEachFeature: bpSPUD,
-		    }).addTo(map);
+		    });
 			var permWellsLyr = L.geoJson(json.permWells, {
 			    pointToLayer: function (feature, latlng) {
 					if (feature.properties.OPERATOR == "CHESAPEAKE APPALACHIA LLC") {
@@ -135,13 +135,27 @@ var marcellus = {
 			    	}
 				},
 				onEachFeature: bpPermits,
-		    }).addTo(map);
+		    });
+			var markersSPUD = new L.markerClusterGroup({
+				spiderfyDistanceMultiplier: 2,
+			});
+		    var markersPerm = new L.markerClusterGroup({
+		    	spiderfyDistanceMultiplier: 2,
+		    });
+
+		    markersSPUD.addLayer(SPUDLyr);
+		    markersPerm.addLayer(permWellsLyr);
+		    map.addLayer(markersSPUD);
+		    map.addLayer(markersPerm);
+
+		    console.log(markersSPUD);
 
 		    var toggleMaps = {
-				"SPUD Wells": SPUDLyr,
-				"Permitted Wells": permWellsLyr,
+				"SPUD Wells": markersSPUD,
+				"Permitted Wells": markersPerm,
 		    };
 			var overlayMaps = {
+
 				"Pooling Units": poolingLyr,
 				"Proposed Pipeline": pipeLyr,
 			};
